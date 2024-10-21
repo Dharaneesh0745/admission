@@ -2119,6 +2119,187 @@
 
                             
                             
+                            <div class="input-box">
+                                <label><b>Diploma :<span style="color: red;">*</span></b></label>
+                                </div>
+
+                                <!-- Diploma [nameofinstitution,percentage,course name] -->
+                                <div class="column">
+
+                                <div class="input-box">
+                                    <label><b>Name Of the Institution </b></label>
+                                    <input name="NameOfDiplomaCollegePG" type="text" placeholder="Enter your Institute name" />
+                                </div>
+
+                                <div class="input-box">
+                                    <label for="coursename"><b>Name Of the Diploma Course </b></label>
+                                    <input name="NameOfDiplomaCoursePG" type="text" id="coursename" placeholder="Enter your Course name" />
+                                </div>
+
+                                <div class="input-box">
+                                    <label for="dipmark"><b>Percentage Scored in Diploma <span style="color: red;">*</span></b></label>
+                                    <input type="number" id="dipmark" name="PercentageDiplomaPG" min="0" max="100"placeholder="Enter your percentage"  />
+                                </div>
+
+                                </div>
+
+                                <div class="column">
+                                    <div class="input-box file-upload">
+                                        <label for="diploma12thPdf">
+                                            <b>Diploma Certificate(PDF) <span style="color: red;">*</span></b>
+                                        </label>
+                                        <input type="file" name="DiplomaDocumentPG" id="diplomaPdfPG" accept="application/pdf"  onchange="handlediplomaFileSelect()">
+                                        <span id="diplomaPGfileSizeError" class="hidden" style="color: red;">File size must be less than 1 MB.</span>
+                                    </div>
+
+                                    <div id="diplomapdfPGFileLink" class="input-box file-upload hidden">
+                                        <div class="column">
+                                            <button type="button" id="viewdiplomaPdfPGButton" onclick="viewdiplomaPdfPG()">View PDF</button>
+                                            <button type="button" id="uploaddiplomaPGFileButton" class="hidden uploadButton" data-file-input="DiplomaDocumentPG" onclick="uploaddiplomaPdfPG()">Upload File</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    function handlediplomaFileSelect() {
+                                        const fileInput = document.getElementById('diplomaPdfPG');
+                                        const fileSizeError = document.getElementById('diplomaPGfileSizeError');
+                                        const pdfFileLink = document.getElementById('diplomapdfPGFileLink');
+                                        const uploadButton = document.getElementById('uploaddiplomaPGFileButton');
+                                        
+                                        if (fileInput.files.length > 0) {
+                                            const file = fileInput.files[0];
+                                            if (file.size > 1048576) { // 1 MB = 1048576 bytes
+                                                fileSizeError.classList.remove('hidden');
+                                                pdfFileLink.classList.add('hidden');
+                                                uploadButton.classList.add('hidden');
+                                                fileInput.value = '';
+                                                alert('File must be less than 1 MB.');
+                                            } else {
+                                                fileSizeError.classList.add('hidden');
+                                                pdfFileLink.classList.remove('hidden');
+                                                uploadButton.classList.remove('hidden');
+                                            }
+                                        } else {
+                                            fileSizeError.classList.add('hidden');
+                                            pdfFileLink.classList.add('hidden');
+                                            uploadButton.classList.add('hidden');
+                                        }
+                                    }
+
+                                    function viewdiplomaPdfPG() {
+                                        const fileInput = document.getElementById('diplomaPdfPG');
+                                        if (fileInput.files.length > 0 && fileInput.files[0].size <= 1048576) {
+                                            const fileURL = URL.createObjectURL(fileInput.files[0]);
+                                            window.open(fileURL);
+                                        } else {
+                                            alert('No file selected to view or file size exceeds limit.');
+                                        }
+                                    }
+
+                                    function uploaddiplomaPdfPG() {
+                                        const fileInput = document.getElementById('diplomaPdfPG');
+                                        if (fileInput.files.length > 0 && fileInput.files[0].size <= 1048576) {
+                                            alert('File uploaded successfully.');
+                                            // Here you can add the actual upload functionality
+                                        } else {
+                                            alert('No file selected to upload or file size exceeds limit.');
+                                        }
+                                    }
+                                </script>
+
+
+                                <div class="input-box">
+                                <label><b>Bachelor's Degree : <span style="color: red;">*</span></b></label>
+                                </div>
+
+                                <div class="column">              
+                                <div class="input-box">
+                                    <label for="instituteName"><b>Name Of the College </b></label>
+                                    <input type="text" name="NameOfUGCollege" id="instituteName" placeholder="Enter your Institute name" />
+                                </div>
+
+                                <div class="input-box">
+                                    <label for="coursename"><b>Name Of UG Course </b></label>
+                                    <input type="text" name="NameOfUGCourse" id="coursename" placeholder="Enter your Course name" />
+                                </div>
+
+                                <div class="input-box">
+                                    <label for="cgpa"><b> CGPA <span style="color: red;">*</span></b></label>
+                                    <input type="number" step="any" id="cgpa" name="CGPA" min="0" max="10"placeholder="Enter your percentage"  />
+                                </div>
+                                </div>      
+                                
+                                <div class="column">
+                                    <div class="input-box file-upload">
+                                        <label for="degreePdf">
+                                            <b>Degree (PDF) <span style="color: red;">*</span></b>
+                                        </label>
+                                        <input type="file" name="UGDocument" id="degreePdf" accept="application/pdf"  onchange="handledegreeFileSelect()">
+                                        <span id="degreefileSizeError" class="hidden" style="color: red;">File size must be less than 1 MB.</span>
+                                    </div>
+
+                                    <div id="degreepdfFileLink" class="input-box file-upload hidden">
+                                        <div class="column">
+                                            <button type="button" id="viewdegreePdfButton" onclick="viewdegreePdf()">View PDF</button>
+                                            <button type="button" id="uploaddegreeFileButton" class="hidden uploadButton" data-file-input="UGDocument" onclick="uploaddegreePdf()">Upload File</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    function handledegreeFileSelect() {
+                                        const fileInput = document.getElementById('degreePdf');
+                                        const fileSizeError = document.getElementById('degreefileSizeError');
+                                        const pdfFileLink = document.getElementById('degreepdfFileLink');
+                                        const uploadButton = document.getElementById('uploaddegreeFileButton');
+                                        
+                                        if (fileInput.files.length > 0) {
+                                            const file = fileInput.files[0];
+                                            if (file.size > 1048576) { // 1 MB = 1048576 bytes
+                                                fileSizeError.classList.remove('hidden');
+                                                pdfFileLink.classList.add('hidden');
+                                                uploadButton.classList.add('hidden');
+                                                fileInput.value = '';
+                                                alert('File must be less than 1 MB.');
+                                            } else {
+                                                fileSizeError.classList.add('hidden');
+                                                pdfFileLink.classList.remove('hidden');
+                                                uploadButton.classList.remove('hidden');
+                                            }
+                                        } else {
+                                            fileSizeError.classList.add('hidden');
+                                            pdfFileLink.classList.add('hidden');
+                                            uploadButton.classList.add('hidden');
+                                        }
+                                    }
+
+                                    function viewdegreePdf() {
+                                        const fileInput = document.getElementById('degreePdf');
+                                        if (fileInput.files.length > 0 && fileInput.files[0].size <= 1048576) {
+                                            const fileURL = URL.createObjectURL(fileInput.files[0]);
+                                            window.open(fileURL);
+                                        } else {
+                                            alert('No file selected to view or file size exceeds limit.');
+                                        }
+                                    }
+
+                                    function uploaddegreePdf() {
+                                        const fileInput = document.getElementById('degreePdf');
+                                        if (fileInput.files.length > 0 && fileInput.files[0].size <= 1048576) {
+                                            alert('File uploaded successfully.');
+                                            // Here you can add the actual upload functionality
+                                        } else {
+                                            alert('No file selected to upload or file size exceeds limit.');
+                                        }
+                                    }
+                                </script>
+                                
+                            
+                            </div>
+
+                            
+                            
                             <script>
                                 document.getElementById('educationLevel').addEventListener('change', function() {
                                 var ugFields = document.getElementById('ugFields');

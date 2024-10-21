@@ -2191,7 +2191,7 @@
                                     }
                                 </script>
 
-<div class="input-box">
+                            <div class="input-box">
                                 <label><b>Diploma :<span style="color: red;">*</span></b></label>
                                 </div>
 

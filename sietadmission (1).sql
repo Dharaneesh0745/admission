@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2024 at 11:31 AM
+-- Generation Time: Oct 21, 2024 at 11:53 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -155,7 +155,7 @@ CREATE TABLE `umis` (
   `BankBranch` varchar(75) DEFAULT NULL,
   `City` varchar(75) DEFAULT NULL,
   `AcademicYearJoining` varchar(75) DEFAULT NULL,
-  `StreamType` varchar(15) DEFAULT NULL,
+  `StreamType` varchar(50) DEFAULT NULL,
   `CourseType` varchar(50) DEFAULT NULL,
   `Course` varchar(75) DEFAULT NULL,
   `Branch` varchar(75) DEFAULT NULL,
@@ -171,7 +171,7 @@ CREATE TABLE `umis` (
   `Hosteller` varchar(5) DEFAULT NULL,
   `SeekingAdmissionFor` varchar(100) DEFAULT NULL,
   `SchoolName10` varchar(50) DEFAULT NULL,
-  `Board10` varchar(10) NOT NULL,
+  `Board10` varchar(15) NOT NULL,
   `SchoolName12` varchar(50) DEFAULT NULL,
   `TotalMark10` int(4) DEFAULT NULL,
   `TotalMark10Document` longblob DEFAULT NULL,
@@ -184,7 +184,7 @@ CREATE TABLE `umis` (
   `ChemistryMark` int(4) DEFAULT NULL,
   `MathsMark` int(4) DEFAULT NULL,
   `CutOff` float DEFAULT NULL,
-  `RegisterNo12` int(15) DEFAULT NULL,
+  `RegisterNo12` varchar(20) DEFAULT NULL,
   `CGPA` float DEFAULT NULL,
   `NameOfUGcourse` varchar(20) DEFAULT NULL,
   `NameOfUGCollege` varchar(100) DEFAULT NULL,
