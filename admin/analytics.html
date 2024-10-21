@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analytics Page</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .chart-container {
+        width: 48%; /* Adjust width as needed */
+        margin-bottom: 20px;
+      }
+
+      .comp {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      #totalRecords {
+        background-color: chocolate;
+        color: white;
+        padding: 10px;
+      }
+
+      @media (max-width: 768px) {
+        .chart-container {
+          width: 100%; /* Full width on smaller screens */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button
+      style="
+        padding: 10px;
+        border-radius: 10px;
+        background-color: rgb(85, 85, 255);
+        color: white;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+      "
+      onclick="goBack()"
+    >
+      Back
+    </button>
+
+    <div
+      style="margin-bottom: 50px; margin-top: 50px; margin-left: 680px"
+      class="comp"
+    >
+      <div style="border-radius: 30px" id="totalRecords"></div>
+    </div>
+    <!-- <div class="comp">
+      <div style="border-radius: 30px" id="totalRecords"></div>
+    </div> -->
+    <!-- <div class="comp">
+      <div style="border-radius: 30px" id="maleCount"></div>
+      <div style="border-radius: 30px" id="femaleCount"></div>
+    </div> -->
+
+    <div class="" style="margin-bottom: 20px;">
+  <span id="maleCount" style="border-radius: 30px; background-color: lightblue; padding: 10px;"></span>
+  <span id="femaleCount" style="border-radius: 30px; background-color: lightpink; padding: 10px;"></span>
+</div>
+
+
+    <div class="container">
+      <!-- Department-wise Pie Chart -->
+      <div class="chart-container">
+        <canvas id="departmentChart"></canvas>
+      </div>
+      <!-- Daily Registrations Line Chart -->
+      <div class="chart-container">
+        <canvas id="dailyRegistrationsChart"></canvas>
+      </div>
+      <!-- Management and Counseling Students Bar Chart -->
+      <div class="chart-container">
+        <canvas id="managementCounselingChart"></canvas>
+      </div>
+      <!-- Course-wise Pie Chart -->
+      <!-- <div class="chart-container">
+        <canvas id="courseChart"></canvas>
+      </div> -->
+    </div>
+
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+
+      // document.addEventListener("DOMContentLoaded", function () {
+      //   fetch("fetch_data.php")
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //       // Total Registered Students
+      //       document.getElementById("totalRecords").innerText =
+      //         "Total Students: " + data.total_records;
+
+      //       // Department-wise Pie Chart
+      //       const departmentCtx = document
+      //         .getElementById("departmentChart")
+      //         .getContext("2d");
+      //       new Chart(departmentCtx, {
+      //         type: "pie",
+      //         data: {
+      //           labels: Object.keys(data.departmentData),
+      //           datasets: [
+      //             {
+      //               label: "Department-wise Count",
+      //               data: Object.values(data.departmentData),
+      //               backgroundColor: Object.keys(data.departmentData).map(
+      //                 () =>
+      //                   "#" +
+      //                   ((Math.random() * 0xffffff) << 0)
+      //                     .toString(16)
+      //                     .padStart(6, "0")
+      //               ),
+      //               borderWidth: 1,
+      //             },
+      //           ],
+      //         },
+      //         options: {
+      //           responsive: true,
+      //           maintainAspectRatio: false,
+      //         },
+      //       });
+
+      //       // Daily Registrations Line Chart
+      //       const dailyRegistrationsCtx = document
+      //         .getElementById("dailyRegistrationsChart")
+      //         .getContext("2d");
+      //       new Chart(dailyRegistrationsCtx, {
+      //         type: "line",
+      //         data: {
+      //           labels: Object.keys(data.dailyRegistrations),
+      //           datasets: [
+      //             {
+      //               label: "Daily Registrations",
+      //               data: Object.values(data.dailyRegistrations),
+      //               backgroundColor: "rgba(75, 192, 192, 0.2)", // Green
+      //               borderColor: "rgba(75, 192, 192, 1)",
+      //               borderWidth: 1,
+      //             },
+      //           ],
+      //         },
+      //         options: {
+      //           responsive: true,
+      //           maintainAspectRatio: false,
+      //           scales: {
+      //             x: {
+      //               title: {
+      //                 display: true,
+      //                 text: "Date",
+      //               },
+      //               ticks: {
+      //                 maxRotation: 90, // Rotate x-axis labels for better visibility
+      //                 autoSkip: true,
+      //               },
+      //             },
+      //             y: {
+      //               beginAtZero: true,
+      //               title: {
+      //                 display: true,
+      //                 text: "Number of Registrations",
+      //               },
+      //             },
+      //           },
+      //         },
+      //       });
+
+      //       // Management and Counseling Students Bar Chart
+      //       const managementCounselingCtx = document
+      //         .getElementById("managementCounselingChart")
+      //         .getContext("2d");
+      //       new Chart(managementCounselingCtx, {
+      //         type: "bar",
+      //         data: {
+      //           labels: ["Management Students", "Counseling Students"],
+      //           datasets: [
+      //             {
+      //               label: "Counseling & Management Students",
+      //               data: [
+      //                 data.managementStudentsCount,
+      //                 data.counselingStudentsCount,
+      //               ],
+      //               backgroundColor: [
+      //                 "rgba(255, 99, 132, 0.2)",
+      //                 "rgba(54, 162, 235, 0.2)",
+      //               ], // Different colors for each bar
+      //               borderColor: [
+      //                 "rgba(255, 99, 132, 1)",
+      //                 "rgba(54, 162, 235, 1)",
+      //               ],
+      //               borderWidth: 1,
+      //             },
+      //           ],
+      //         },
+      //         options: {
+      //           responsive: true,
+      //           maintainAspectRatio: false,
+      //           scales: {
+      //             y: {
+      //               beginAtZero: true,
+      //               title: {
+      //                 display: true,
+      //                 text: "Number of Students",
+      //               },
+      //             },
+      //           },
+      //         },
+      //       });
+
+      //       // Course-wise Pie Chart
+      //       const courseCtx = document
+      //         .getElementById("courseChart")
+      //         .getContext("2d");
+      //       new Chart(courseCtx, {
+      //         type: "pie",
+      //         data: {
+      //           labels: Object.keys(data.courseData),
+      //           datasets: [
+      //             {
+      //               label: "Course-wise Count",
+      //               data: Object.values(data.courseData),
+      //               backgroundColor: Object.keys(data.courseData).map(
+      //                 () =>
+      //                   "#" +
+      //                   ((Math.random() * 0xffffff) << 0)
+      //                     .toString(16)
+      //                     .padStart(6, "0")
+      //               ),
+      //               borderWidth: 1,
+      //             },
+      //           ],
+      //         },
+      //         options: {
+      //           responsive: true,
+      //           maintainAspectRatio: false,
+      //         },
+      //       });
+      //     })
+      //     .catch((error) => {
+      //       console.error("Error fetching data:", error);
+      //     });
+      // });
+      document.addEventListener("DOMContentLoaded", function () {
+  fetch("fetch_data.php")
+    .then((response) => response.json())
+    .then((data) => {
+      // Total Registered Students
+      document.getElementById("totalRecords").innerText =
+        "Total Students: " + data.total_records;
+
+        console.log(data);
+
+      // Male and Female Count
+      const maleCount = data.male_count ?? 0;
+      const femaleCount = data.female_count ?? 0;
+      document.getElementById("maleCount").innerText =
+        "Male Students: " + maleCount;
+      document.getElementById("femaleCount").innerText =
+        "Female Students: " + femaleCount;
+
+      // Department-wise Pie Chart
+      const departmentCtx = document
+        .getElementById("departmentChart")
+        .getContext("2d");
+      new Chart(departmentCtx, {
+        type: "pie",
+        data: {
+          labels: Object.keys(data.departmentData),
+          datasets: [
+            {
+              label: "Department-wise Count",
+              data: Object.values(data.departmentData),
+              backgroundColor: Object.keys(data.departmentData).map(
+                () =>
+                  "#" +
+                  ((Math.random() * 0xffffff) << 0)
+                    .toString(16)
+                    .padStart(6, "0")
+              ),
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+        },
+      });
+
+      // Daily Registrations Line Chart
+      const dailyRegistrationsCtx = document
+        .getElementById("dailyRegistrationsChart")
+        .getContext("2d");
+      new Chart(dailyRegistrationsCtx, {
+        type: "line",
+        data: {
+          labels: Object.keys(data.dailyRegistrations),
+          datasets: [
+            {
+              label: "Daily Registrations",
+              data: Object.values(data.dailyRegistrations),
+              backgroundColor: "rgba(75, 192, 192, 0.2)", // Green
+              borderColor: "rgba(75, 192, 192, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "Date",
+              },
+              ticks: {
+                maxRotation: 90,
+                autoSkip: true,
+              },
+            },
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "Number of Registrations",
+              },
+            },
+          },
+        },
+      });
+
+      // Management and Counseling Students Bar Chart
+      const managementCounselingCtx = document
+        .getElementById("managementCounselingChart")
+        .getContext("2d");
+      new Chart(managementCounselingCtx, {
+        type: "bar",
+        data: {
+          labels: ["Management Students", "Counseling Students"],
+          datasets: [
+            {
+              label: "Counseling & Management Students",
+              data: [
+                data.managementStudentsCount,
+                data.counselingStudentsCount,
+              ],
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "Number of Students",
+              },
+            },
+          },
+        },
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+    });
+});
+
+    </script>
+  </body>
+</html>
