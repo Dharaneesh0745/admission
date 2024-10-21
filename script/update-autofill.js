@@ -5,71 +5,71 @@ $(document).ready(function() {
 });
 
 
-function updateCourseOptions(courseType) {
+// function updateCourseOptions(courseType) {
 
-    if (courseType) {
-        // Fetch courses based on courseType
-        $.ajax({
-            url: './autofill-php/get-courses.php', // Adjust URL to your server-side script
-            type: 'GET',
-            data: { CourseType: courseType },
-            success: function(response) {
-                try {
-                    var courses = JSON.parse(response);
-                    // console.log(courses);
-                    if (courses.error) {
-                        console.error(courses.error);
-                    } else {
-                        // Populate the Course dropdown
-                        courses.forEach(function(course) {
-                            $('#courseType').append(<option value="${course.name}">${course.name}</option>);
-                        });
-                    }
-                } catch (e) {
-                    console.error("Invalid JSON response");
-                    console.error(response);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.log("ERROR:");
-                console.error('AJAX Error: ' + status + error);
-            }
-        });
-    }
-}
+//     if (courseType) {
+//         // Fetch courses based on courseType
+//         $.ajax({
+//             url: './autofill-php/get-courses.php', // Adjust URL to your server-side script
+//             type: 'GET',
+//             data: { CourseType: courseType },
+//             success: function(response) {
+//                 try {
+//                     var courses = JSON.parse(response);
+//                     // console.log(courses);
+//                     if (courses.error) {
+//                         console.error(courses.error);
+//                     } else {
+//                         // Populate the Course dropdown
+//                         courses.forEach(function(course) {
+//                             $('#courseType').append(<option value="${course.name}">${course.name}</option>);
+//                         });
+//                     }
+//                 } catch (e) {
+//                     console.error("Invalid JSON response");
+//                     console.error(response);
+//                 }
+//             },
+//             error: function(xhr, status, error) {
+//                 console.log("ERROR:");
+//                 console.error('AJAX Error: ' + status + error);
+//             }
+//         });
+//     }
+// }
 
-function updateBranchOptions(course) {
+// function updateBranchOptions(course) {
 
-    if (course) {
-        // Fetch courses based on courseType
-        $.ajax({
-            url: './autofill-php/get-branches.php', // Adjust URL to your server-side script
-            type: 'GET',
-            data: { Course: course },
-            success: function(response) {
-                try {
-                    var Branches = JSON.parse(response);
-                    // console.log(Branches);
-                    if (Branches.error) {
-                        console.error(Branches.error);
-                    } else {
-                        // Populate the Course dropdown
-                        Branches.forEach(function(branch) {
-                            $('#branch').append(<option value="${branch.name}">${branch.name}</option>);
-                        });
-                    }
-                } catch (e) {
-                    console.error("Invalid JSON response");
-                    console.error(response);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.log("ERROR:");
-                console.error('AJAX Error: ' + status + error);
-            }
-        });
-    }
-}
+//     if (course) {
+//         // Fetch courses based on courseType
+//         $.ajax({
+//             url: './autofill-php/get-branches.php', // Adjust URL to your server-side script
+//             type: 'GET',
+//             data: { Course: course },
+//             success: function(response) {
+//                 try {
+//                     var Branches = JSON.parse(response);
+//                     // console.log(Branches);
+//                     if (Branches.error) {
+//                         console.error(Branches.error);
+//                     } else {
+//                         // Populate the Course dropdown
+//                         Branches.forEach(function(branch) {
+//                             $('#branch').append(<option value="${branch.name}">${branch.name}</option>);
+//                         });
+//                     }
+//                 } catch (e) {
+//                     console.error("Invalid JSON response");
+//                     console.error(response);
+//                 }
+//             },
+//             error: function(xhr, status, error) {
+//                 console.log("ERROR:");
+//                 console.error('AJAX Error: ' + status + error);
+//             }
+//         });
+//     }
+// }
 
 function fetchstudentdata() {
   var StudentMobileNo = $('#StudentMobileNo').val();

@@ -4,7 +4,7 @@
 $studentMobileNo = isset($_POST['StudentMobileNo']) ? $_POST['StudentMobileNo'] : '';
 
 // Fetch student details including document columns
-$sql = "SELECT EmisId, Salutation, StudName, StudEmailID, StudDOB, Gender, BloodGroup, Nationality, Religion, Community, Caste, AadhaarNumber, FirstGraduate, SpecialAdmissionQuota, DifferentlyAbled, P_Country, P_State, P_LocationType, P_District, P_Taluk, P_Village, P_Block, P_Pincode, P_VillagePanchayat, P_PostalAddress, C_Country, C_State, C_LocationType, C_District, C_Taluk, C_Village, C_Block, C_Pincode, C_VillagePanchayat, C_PostalAddress, FatherName, FatherOccupation, MotherName, MotherOccupation, GuardianName, Orphan, AnnualFamilyIncome, ParentsMobileNumber, AccountNumber, IfscCode, BankName, BankBranch, City, AcademicYearJoining, StreamType, CourseType, Course, Branch, MediumOfInstruction, ModeOfStudy, DateOfAdmission, TypeOfAdmission, counsellingNumber, RegistrationNumber, LateralEntry, Hosteller, SeekingAdmissionFor, SchoolName10, Board10, SchoolName12, TotalMark10, TotalMark12, MediumOfInstruction10, MediumOfInstruction12, Group12, PhysicsMark, ChemistryMark, MathsMark, CutOff, RegisterNo12, CGPA, NameOfUGcourse, NameOfUGCollege, NameOfDiplomaCourse, PercentageDiploma, NameOfDiplomaCollege, Sport, SportName, SportLevel, ProfilePhoto, CommunityDocument, AadhaarDocument, FirstGraduateDocument, MigrationDocument, IncomeDocument, CounsellingDocument, DiplomaDocument, UGDocument, TotalMark10Document, TotalMark12Document, TransferCertificate FROM umis WHERE StudentMobileNo = '" . $conn->real_escape_string($studentMobileNo) . "'";
+$sql = "SELECT EmisId, Salutation, StudName, StudEmailID, StudDOB, Gender, BloodGroup, Nationality, Religion, Community, Caste, AadhaarNumber, FirstGraduate, SpecialAdmissionQuota, DifferentlyAbled, P_Country, P_State, P_LocationType, P_District, P_Taluk, P_Village, P_Block, P_Pincode, P_VillagePanchayat, P_PostalAddress, C_Country, C_State, C_LocationType, C_District, C_Taluk, C_Village, C_Block, C_Pincode, C_VillagePanchayat, C_PostalAddress, FatherName, FatherOccupation, MotherName, MotherOccupation, GuardianName, Orphan, AnnualFamilyIncome, ParentsMobileNumber, AccountNumber, IfscCode, BankName, BankBranch, City, AcademicYearJoining, StreamType, CourseType, Course, Branch, MediumOfInstruction, ModeOfStudy, DateOfAdmission, TypeOfAdmission, counsellingNumber, RegistrationNumber, LateralEntry, Hosteller, SeekingAdmissionFor, SchoolName10, Board10, SchoolName12, TotalMark10, TotalMark12, MediumOfInstruction10, MediumOfInstruction12, Group12, PhysicsMark, ChemistryMark, MathsMark, CutOff, RegisterNo12, CGPA, NameOfUGcourse, NameOfUGCollege, NameOfDiplomaCourse, PercentageDiploma, NameOfDiplomaCollege, Sport, SportName, SportLevel, ProfilePhoto, CommunityDocument, AadhaarDocument, FirstGraduateDocument, MigrationDocument, IncomeDocument, CounsellingDocument, DiplomaDocument, UGDocument, TotalMark10Document, TotalMark12Document, TransferCertificate ,SignaturePhoto FROM umis WHERE StudentMobileNo = '" . $conn->real_escape_string($studentMobileNo) . "'";
 $result = $conn->query($sql);
 $studentDetails = $result->fetch_assoc();
 ?>
@@ -64,19 +64,8 @@ $studentDetails = $result->fetch_assoc();
             Student Details - <?php echo htmlspecialchars($studentDetails['StudName']); ?>
         </div>
         <div class="card-body">
-            <div class="row">
-                <?php foreach ($studentDetails as $key => $value) { ?>
-                    <?php if (!in_array($key, ['ProfilePhoto', 'CommunityDocument', 'AadhaarDocument', 'FirstGraduateDocument', 'MigrationDocument', 'IncomeDocument', 'CounsellingDocument', 'DiplomaDocument', 'UGDocument', 'TotalMark10Document', 'TotalMark12Document', 'TransferCertificate'])) { ?>
-                        <div class="col-md-6 mb-3">
-                            <strong><?php echo str_replace('_', ' ', $key); ?>:</strong>
-                            <p><?php echo htmlspecialchars($value); ?></p>
-                        </div>
-                    <?php } ?>
-                <?php } ?>
-            </div>
-
-            <!-- Profile Photo Section -->
-            <?php if (!empty($studentDetails['ProfilePhoto'])) { ?>
+             <!-- Profile Photo Section -->
+             <?php if (!empty($studentDetails['ProfilePhoto'])) { ?>
             <div class="row">
                 <div class="col-md-12 text-center">
                     <h5>Profile Photo</h5>
@@ -86,7 +75,28 @@ $studentDetails = $result->fetch_assoc();
                 </div>
             </div>
             <?php } ?>
-
+             <!-- Signature Photo Section -->
+             <?php if (!empty($studentDetails['SignaturePhoto'])) { ?>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h5>Signature Photo</h5>
+                    <img src="view_documents.php?StudentMobileNo=<?php echo htmlspecialchars($studentMobileNo); ?>&document=SignaturePhoto" alt="Signature Photo" class="img-thumbnail" style="max-width: 200px;">
+                    <br>
+                    <a href="download.php?StudentMobileNo=<?php echo htmlspecialchars($studentMobileNo); ?>&document=SignaturePhoto" class="btn btn-primary mt-2">Download Signature Photo</a>
+                </div>
+            </div>
+            <?php } ?>
+        <div class="card-body">
+            <div class="row">
+                <?php foreach ($studentDetails as $key => $value) { ?>
+                    <?php if (!in_array($key, ['SignaturePhoto','ProfilePhoto', 'CommunityDocument', 'AadhaarDocument', 'FirstGraduateDocument', 'MigrationDocument', 'IncomeDocument', 'CounsellingDocument', 'DiplomaDocument', 'UGDocument', 'TotalMark10Document', 'TotalMark12Document', 'TransferCertificate'])) { ?>
+                        <div class="col-md-6 mb-3">
+                            <strong><?php echo str_replace('_', ' ', $key); ?>:</strong>
+                            <p><?php echo htmlspecialchars($value); ?></p>
+                        </div>
+                    <?php } ?>
+                <?php } ?>
+            </div>
             <div class="document-section">
                 <h5>Select Documents to Download</h5>
                 <form method="POST" action="download.php">

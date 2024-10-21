@@ -9,6 +9,10 @@ $(document).ready(function() {
         if(fileInputName=="UGTotalMark12Document"||fileInputName=="LETotalMark12Document"||fileInputName=="PGTotalMark12Document"){
             fileInputName = "TotalMark12Document";
         }
+
+        if(fileInputName=="DiplomaDocumentLE"||fileInputName=="DiplomaDocumentPG"){
+            fileInputName = "DiplomaDocument";
+        }
         var mobileNumber = $('#StudentMobileNo').val();
 
         console.log('File Input Name:', fileInputName);

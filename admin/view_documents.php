@@ -17,7 +17,8 @@ $allowedDocuments = [
     'UGDocument',
     'TotalMark10Document',
     'TotalMark12Document',
-    'TransferCertificate'
+    'TransferCertificate',
+    'SignaturePhoto'
 ];
 
 if (!in_array($document, $allowedDocuments)) {

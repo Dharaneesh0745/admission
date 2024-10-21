@@ -52,6 +52,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
             exit;
         }
     }
+    if (!empty($studentMobileNo) && $document === 'SignaturePhoto') {
+        $sql = "SELECT SignaturePhoto FROM umis WHERE StudentMobileNo = '" . $conn->real_escape_string($studentMobileNo) . "'";
+        $result = $conn->query($sql);
+        
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $photo = $row['SignaturePhoto'];  // Assuming ProfilePhoto column contains the BLOB data
+
+            if (!empty($photo)) {
+                // Detect the MIME type of the image
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                $photoMimeType = finfo_buffer($finfo, $photo);
+                finfo_close($finfo);
+
+                // Send the appropriate headers to initiate the file download
+                header('Content-Type: ' . $photoMimeType);
+                header('Content-Disposition: attachment; filename="SignaturePhoto.jpg"');  // Set appropriate extension (e.g., .png or .jpg)
+                header('Content-Length: ' . strlen($photo));
+
+                // Output the BLOB data as a file
+                echo $photo;
+
+                exit;
+            } else {
+                echo "Photo not found.";
+                exit;
+            }
+        } else {
+            echo "No record found.";
+            exit;
+        }
+    }
 
     // Merging multiple PDF documents logic
     if (!empty($studentMobileNo) && !empty($documentTypes)) {

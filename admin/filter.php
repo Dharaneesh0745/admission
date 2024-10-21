@@ -268,13 +268,16 @@ if(!isset($_SESSION['admin_name'])){
                                 echo "<td>
                                     <form method='POST' action='view.php' style='display:inline;'>
                                         <input type='hidden' name='StudentMobileNo' value='" . htmlspecialchars($row["StudentMobileNo"]) . "'>
+                                    </form>
+                                     <form method='POST' action='view.php' style='display:inline;'>
+                                        <input type='hidden' name='StudentMobileNo' value='" . htmlspecialchars($row["StudentMobileNo"]) . "'>
                                         <button type='submit' name='action' value='view' class='btn btn-info btn-sm'>View</button>
                                     </form>
                                     <form method='POST' action='delete.php' style='display:inline;'>
                                         <input type='hidden' name='StudentMobileNo' value='" . htmlspecialchars($row["StudentMobileNo"]) . "'>
                                         <button type='submit' name='action' value='delete' class='btn btn-danger btn-sm' onclick=\"return confirm('Are you sure you want to delete this record?')\">Delete</button>
                                     </form>
-                       </td>";
+                                    </td>";
                                 echo "</tr>";
                             }
                         } else {

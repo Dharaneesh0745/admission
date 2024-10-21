@@ -541,7 +541,76 @@
                                         alert('No file selected to upload or file size exceeds limit.');
                                     }
                                 }
-                            </script>                     
+                            </script>      
+                            
+                            
+                            <div class="column">
+                                <div class="input-box file-upload">
+                                    <label for="SignPhoto">
+                                        <b>Signature Photo (Image) <span style="color: red;">*</span></b>
+                                    </label>
+                                    <input type="file" name="SignaturePhoto" id="SignPhoto" accept="image/*" onchange="handleSignPhotoSelect()">
+                                    <span id="signPhotoSizeError" class="hidden" style="color: red;">File size must be less than 1 MB.</span>
+                                </div>
+
+                                <div id="signPhotoFileLink" class="input-box file-upload hidden">
+                                    <div class="column">
+                                        <button type="button" id="viewSignPhotoButton" onclick="viewSignPhoto()">View Image</button>
+                                        <button type="button" id="uploadSignPhotoButton" data-file-input="SignaturePhoto" class="hidden uploadButton" onclick="uploadSignPhoto()">Upload File</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script>
+                                function handleSignPhotoSelect() {
+                                    const fileInput = document.getElementById('SignPhoto');
+                                    const fileSizeError = document.getElementById('signPhotoSizeError');
+                                    const photoFileLink = document.getElementById('signPhotoFileLink');
+                                    const uploadButton = document.getElementById('uploadSignPhotoButton');
+                                    
+                                    if (fileInput.files.length > 0) {
+                                        const file = fileInput.files[0];
+                                        if (file.size > 1048576) { // 1 MB = 1048576 bytes
+                                            fileSizeError.classList.remove('hidden');
+                                            photoFileLink.classList.add('hidden');
+                                            uploadButton.classList.add('hidden');
+                                            fileInput.value = '';
+                                            alert('File must be less than 1 MB.');
+                                        } else {
+                                            fileSizeError.classList.add('hidden');
+                                            photoFileLink.classList.remove('hidden');
+                                            uploadButton.classList.remove('hidden');
+                                        }
+                                    } else {
+                                        fileSizeError.classList.add('hidden');
+                                        photoFileLink.classList.add('hidden');
+                                        uploadButton.classList.add('hidden');
+                                    }
+                                }
+
+                                function viewSignPhoto() {
+                                    const fileInput = document.getElementById('SignPhoto');
+                                    if (fileInput.files.length > 0 && fileInput.files[0].size <= 1048576) {
+                                        const fileURL = URL.createObjectURL(fileInput.files[0]);
+                                        window.open(fileURL);
+                                    } else {
+                                        alert('No file selected to view or file size exceeds limit.');
+                                    }
+                                }
+
+                                function uploadSignPhoto() {
+                                    const fileInput = document.getElementById('SignPhoto');
+                                    if (fileInput.files.length > 0 && fileInput.files[0].size <= 1048576) {
+                                        alert('File uploaded successfully.');
+                                        // Here you can add the actual upload functionality
+                                    } else {
+                                        alert('No file selected to upload or file size exceeds limit.');
+                                    }
+                                }
+                            </script>
+
+
+
         
                             
                             <div class="column">
@@ -1781,17 +1850,17 @@
 
                                 <div class="input-box">
                                     <label><b>Name Of the Institution </b></label>
-                                    <input name="NameOfDiplomaCollege" type="text" placeholder="Enter your Institute name" />
+                                    <input name="NameOfDiplomaCollegeLE" type="text" placeholder="Enter your Institute name" />
                                 </div>
 
                                 <div class="input-box">
                                     <label for="coursename"><b>Name Of the Diploma Course </b></label>
-                                    <input name="NameOfDiplomaCourse" type="text" id="coursename" placeholder="Enter your Course name" />
+                                    <input name="NameOfDiplomaCourseLE" type="text" id="coursename" placeholder="Enter your Course name" />
                                 </div>
 
                                 <div class="input-box">
                                     <label for="dipmark"><b>Percentage Scored in Diploma <span style="color: red;">*</span></b></label>
-                                    <input type="number" id="dipmark" name="PercentageDiploma" min="0" max="100"placeholder="Enter your percentage"  />
+                                    <input type="number" id="dipmark" name="PercentageDiplomaLE" min="0" max="100"placeholder="Enter your percentage"  />
                                 </div>
 
                                 </div>
@@ -1808,7 +1877,7 @@
                                     <div id="diplomapdfFileLink" class="input-box file-upload hidden">
                                         <div class="column">
                                             <button type="button" id="viewdiplomaPdfButton" onclick="viewdiplomaPdf()">View PDF</button>
-                                            <button type="button" id="uploaddiplomaFileButton" class="hidden uploadButton" data-file-input="DiplomaDocument" onclick="uploaddiplomaPdf()">Upload File</button>
+                                            <button type="button" id="uploaddiplomaFileButton" class="hidden uploadButton" data-file-input="DiplomaDocumentLE" onclick="uploaddiplomaPdf()">Upload File</button>
                                         </div>
                                     </div>
                                 </div>
@@ -2158,7 +2227,7 @@
                                     <div id="diplomapdfPGFileLink" class="input-box file-upload hidden">
                                         <div class="column">
                                             <button type="button" id="viewdiplomaPdfPGButton" onclick="viewdiplomaPdfPG()">View PDF</button>
-                                            <button type="button" id="uploaddiplomaPGFileButton" class="hidden uploadButton" data-file-input="DiplomaDocument" onclick="uploaddiplomaPdfPG()">Upload File</button>
+                                            <button type="button" id="uploaddiplomaPGFileButton" class="hidden uploadButton" data-file-input="DiplomaDocumentPG" onclick="uploaddiplomaPdfPG()">Upload File</button>
                                         </div>
                                     </div>
                                 </div>
