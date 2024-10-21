@@ -7,6 +7,7 @@ $branchFilter = isset($_GET['Branch']) ? $conn->real_escape_string($_GET['Branch
 $genderFilter = isset($_GET['Gender']) ? $conn->real_escape_string($_GET['Gender']) : '';
 $courseTypeFilter = isset($_GET['CourseType']) ? $conn->real_escape_string($_GET['CourseType']) : '';
 $mobileNoFilter = isset($_GET['StudentMobileNo']) ? $conn->real_escape_string($_GET['StudentMobileNo']) : '';
+$AcademicYearJoining=isset($_GET['AcademicYearJoining']) ? $conn->real_escape_string($_GET['AcademicYearJoining']) : '';
 $documentTypeFilter = isset($_GET['DocumentType']) ? $conn->real_escape_string($_GET['DocumentType']) : ''; // New filter for document type
 
 // SQL query with filters
@@ -25,6 +26,9 @@ if ($courseTypeFilter != '') {
 }
 if ($mobileNoFilter != '') {
     $sql .= " AND StudentMobileNo = '" . $mobileNoFilter . "'";
+}
+if ($AcademicYearJoining != '') {
+    $sql .= " AND AcademicYearJoining = '" . $AcademicYearJoining . "'";
 }
 if ($documentTypeFilter != '') {
     $sql .= " AND " . $documentTypeFilter . " IS NOT NULL"; // Filter for document type
@@ -201,7 +205,10 @@ if(!isset($_SESSION['admin_name'])){
                         <label for="StudentMobileNo">Filter by Student Mobile No:</label>
                         <input type="text" name="StudentMobileNo" id="StudentMobileNo" class="form-control" value="<?php echo htmlspecialchars($mobileNoFilter); ?>">
                     </div>
-
+                    <div class="form-group col-md-3">
+                        <label for="AcademicYearJoining">Filter by BATCH Year:</label>
+                        <input type="text" name="AcademicYearJoining" id="AcademicYearJoining" class="form-control" value="<?php echo htmlspecialchars($AcademicYearJoining); ?>">
+                    </div>
                     <div class="form-group col-md-3">
                         <label for="DocumentType">Filter by Document Type:</label>
                         <select name="DocumentType" id="DocumentType" class="form-control">
@@ -301,6 +308,7 @@ function resetFilters() {
     document.getElementById('Gender').selectedIndex = 0;
     document.getElementById('CourseType').selectedIndex = 0;
     document.getElementById('StudentMobileNo').value = '';
+    document.getElementById('AcademicYearJoining').value = '';
     document.getElementById('DocumentType').selectedIndex = 0; // Reset document type filter
 }
 </script>

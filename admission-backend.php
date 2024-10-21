@@ -106,9 +106,24 @@ if(isset($_POST['submit'])){
       $ChemistryMark = $_POST['ChemistryMark'];
       $RegisterNo12 = $_POST['RegisterNo12'];
       $CutOff = $_POST['CutOff'];
-      $NameOfDiplomaCourse = $_POST['NameOfDiplomaCourse'];
-      $NameOfDiplomaCollege = $_POST['NameOfDiplomaCollege'];
-      $PercentageDiploma = $_POST['PercentageDiploma'];
+      if($_POST['NameOfDiplomaCourseLE']){
+         $NameOfDiplomaCourse = $_POST['NameOfDiplomaCourseLE'];
+      }else{
+         $NameOfDiplomaCourse = $_POST['NameOfDiplomaCoursePG'];
+      }
+      if($_POST['NameOfDiplomaCollegeLE']){
+         $NameOfDiplomaCollege = $_POST['NameOfDiplomaCollegeLE'];
+      }else{
+         $NameOfDiplomaCollege = $_POST['NameOfDiplomaCollegePG'];
+      }
+      if($_POST['PercentageDiplomaLE']){
+         $PercentageDiploma = $_POST['PercentageDiplomaPG'];
+      }else{
+         $PercentageDiploma = $_POST['PercentageDiplomaPG'];
+      }
+      // $NameOfDiplomaCourse = $_POST['NameOfDiplomaCourse'];
+      // $NameOfDiplomaCollege = $_POST['NameOfDiplomaCollege'];
+      // $PercentageDiploma = $_POST['PercentageDiploma'];
       $NameOfUGCollege = $_POST['NameOfUGCollege'];
       $NameOfUGCourse = $_POST['NameOfUGCourse'];
       $CGPA = $_POST['CGPA'];

@@ -11,7 +11,8 @@ if (isset($_FILES['file']) && isset($_POST['column']) && isset($_POST['StudentMo
         $allowedColumns = [
             'ProfilePhoto', 'CommunityDocument', 'AadhaarDocument', 'FirstGraduateDocument',
             'MigrationDocument', 'IncomeDocument', 'CounsellingDocument', 'DiplomaDocument',
-            'UGDocument', 'TotalMark10Document', 'TotalMark12Document', 'TransferCertificate'
+            'UGDocument', 'TotalMark10Document', 'TotalMark12Document', 'TransferCertificate',
+            'SignaturePhoto', 'DiplomaDocument'
         ];
 
         if (in_array($column, $allowedColumns)) {

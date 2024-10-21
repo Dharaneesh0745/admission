@@ -22,7 +22,7 @@ function updateCourseOptions(courseType) {
                     } else {
                         // Populate the Course dropdown
                         courses.forEach(function(course) {
-                            $('#courseType').append(`<option value="${course.name}">${course.name}</option>`);
+                            $('#courseType').append(<option value="${course.name}">${course.name}</option>);
                         });
                     }
                 } catch (e) {
@@ -55,7 +55,7 @@ function updateBranchOptions(course) {
                     } else {
                         // Populate the Course dropdown
                         Branches.forEach(function(branch) {
-                            $('#branch').append(`<option value="${branch.name}">${branch.name}</option>`);
+                            $('#branch').append(<option value="${branch.name}">${branch.name}</option>);
                         });
                     }
                 } catch (e) {
@@ -166,9 +166,9 @@ function fetchstudentdata() {
                             LEMediumOfInstruction12: data.MediumOfInstruction12,
                             LETotalMark12: data.TotalMark12,
                             Group12LE: data.Group12,
-                            NameOfDiplomaCourse: data.NameOfDiplomaCourse,
-                            NameOfDiplomaCollege: data.NameOfDiplomaCollege,
-                            PercentageDiploma: data.PercentageDiploma
+                            NameOfDiplomaCourseLE: data.NameOfDiplomaCourse,
+                            NameOfDiplomaCollegeLE: data.NameOfDiplomaCollege,
+                            PercentageDiplomaLE: data.PercentageDiploma
                         }, function(key, value) {
                             $('[name="' + key + '"]').val(value);
                         });
@@ -184,7 +184,10 @@ function fetchstudentdata() {
                             Group12PG: data.Group12,
                             NameOfUGCollege: data.NameOfUGCollege,
                             NameOfUGCourse: data.NameOfUGCourse,
-                            CGPA: data.CGPA
+                            CGPA: data.CGPA,
+                            NameOfDiplomaCoursePG: data.NameOfDiplomaCourse,
+                            NameOfDiplomaCollegePG: data.NameOfDiplomaCollege,
+                            PercentageDiplomaPG: data.PercentageDiploma
                         }, function(key, value) {
                             $('[name="' + key + '"]').val(value);
                         });
